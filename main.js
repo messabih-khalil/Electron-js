@@ -1,5 +1,5 @@
 // Modules
-const { app, BrowserWindow, session } = require("electron");
+const { app, BrowserWindow, session, dialog } = require("electron");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -27,18 +27,19 @@ function createWindow() {
     mainWindow = null;
   });
 
-  // download
-  ses.on("will-download", (e, downloadItem, webContents) => {
-    downloadItem.on("updated", (e, state) => {
-      let received = downloadItem.getReceivedBytes();
-      if (state === "progressing" && received) {
-        let progress = Math.round(
-          (received / downloadItem.getTotalBytes()) * 100
-        );
-        webContents.executeJavaScript(`window.progress.value = ${progress}`);
-      }
+  // dialog
+
+  const answers = ["Yes", "No"];
+  dialog
+    .showMessageBox({
+      title: "Close",
+      message: "Did you want to close app",
+      detail: "Answer with yes or no",
+      buttons: answers,
+    })
+    .then(result => {
+      if (result.response == 0) ;
     });
-  });
 }
 
 // Electron `app` is ready
@@ -46,7 +47,7 @@ app.on("ready", () => {
   createWindow();
 });
 
-console.log(app.getPath("userData"));
+// console.log(app.getPath("userData"));
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
