@@ -19,9 +19,20 @@
     <h1>Hello from my</h1>
     <p></p>
 
+    <button>
+      <a
+        href="https://file-examples.com/storage/fe332cf53a63a4bd5991eb4/2017/11/file_example_OOG_5MG.ogg"
+        download
+      >
+        Download
+      </a>
+    </button>
+    <input type="range" min="0" max="100" id="progress" />
     <script>
       // You can also require other files to run in this process
       require("./renderer.js");
+
+      window.progress = document.getElementById("progress");
     </script>
   </body>
 </html>

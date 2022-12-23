@@ -20,5 +20,8 @@
     "electron": "^9.0.0",
     "electron-reloader": "^1.2.3",
     "nodemon": "^2.0.0"
+  },
+  "dependencies": {
+    "electron-window-state": "^5.0.3"
   }
 }
