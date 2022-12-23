@@ -1,5 +1,11 @@
 // Modules
-const { app, BrowserWindow, session, dialog } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  session,
+  dialog,
+  globalShortcut,
+} = require("electron");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -27,19 +33,11 @@ function createWindow() {
     mainWindow = null;
   });
 
-  // dialog
+  let printShortcut = "CommandOrControl+n";
 
-  const answers = ["Yes", "No"];
-  dialog
-    .showMessageBox({
-      title: "Close",
-      message: "Did you want to close app",
-      detail: "Answer with yes or no",
-      buttons: answers,
-    })
-    .then(result => {
-      if (result.response == 0) ;
-    });
+  globalShortcut.register(printShortcut, () => {
+    console.log("ctrl + n");
+  });
 }
 
 // Electron `app` is ready
