@@ -10,11 +10,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 800,
-    titleBarStyle: "hidden",
     webPreferences: { nodeIntegration: true },
-    show: false,
   });
-
   // Load index.html into the new BrowserWindow
   mainWindow.loadFile("index.html");
 
@@ -29,7 +26,7 @@ function createWindow() {
 
 // Electron `app` is ready
 app.on("ready", () => {
-  createWindow;
+  createWindow();
 });
 
 console.log(app.getPath("userData"));
