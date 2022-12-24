@@ -48,3 +48,7 @@ app.on("activate", () => {
 ipcMain.on("channel1", (e, args) => {
   console.log(args);
 });
+
+ipcMain.handle("proccess1", (e, data) => {
+  return `proccess ${data}`;
+});

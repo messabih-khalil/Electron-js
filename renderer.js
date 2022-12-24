@@ -8,9 +8,14 @@ const sendInChannel = data => {
 const inputData = document.getElementById("inputData");
 
 document.getElementById("btn").addEventListener("click", e => {
-  sendInChannel(inputData.value);
+  //   sendInChannel(inputData.value);
+  // invoke ipc
+
+  ipcRenderer.invoke("proccess1", inputData.value).then(result => {
+    inputData.value = result;
+  });
 });
 
-ipcRenderer.on("mail-box", (e, data) => {
-  inputData.value = data;
-});
+// ipcRenderer.on("mail-box", (e, data) => {
+//   inputData.value = data;
+// });
