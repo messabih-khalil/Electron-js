@@ -1,19 +1,16 @@
 // Modules
-const {
-  app,
-  BrowserWindow,
-  session,
-  dialog,
-  globalShortcut,
-} = require("electron");
+const { app, BrowserWindow, Menu, MenuItem } = require("electron");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+let mainMenu = new Menu();
+let MenuItem1 = new MenuItem({ label: "Files", submenu: [{ label: "Home" }] });
+
+mainMenu.append(MenuItem1);
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
-  const ses = session.defaultSession;
   mainWindow = new BrowserWindow({
     webPreferences: { nodeIntegration: true },
     show: false,
@@ -27,16 +24,10 @@ function createWindow() {
   });
   // Open DevTools - Remove for PRODUCTION!
   mainWindow.webContents.openDevTools();
-
+  Menu.setApplicationMenu(mainMenu);
   // Listen for window being closed
   mainWindow.on("closed", () => {
     mainWindow = null;
-  });
-
-  let printShortcut = "CommandOrControl+n";
-
-  globalShortcut.register(printShortcut, () => {
-    console.log("ctrl + n");
   });
 }
 
