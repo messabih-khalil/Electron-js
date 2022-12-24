@@ -1,3 +1,16 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
+const { ipcRenderer } = require("electron");
+
+const sendInChannel = data => {
+  ipcRenderer.send("channel1", data);
+};
+
+// get input data
+const inputData = document.getElementById("inputData");
+
+document.getElementById("btn").addEventListener("click", e => {
+  sendInChannel(inputData.value);
+});
+
+ipcRenderer.on("mail-box", (e, data) => {
+  inputData.value = data;
+});
